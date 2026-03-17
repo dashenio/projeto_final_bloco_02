@@ -19,12 +19,13 @@ A API foi construída seguindo os princípios da arquitetura de microserviços c
 
 ### 2.1. Principais Funcionalidades
 
-1.  **Gerenciamento de Categorias**: Criação, listagem, atualização e exclusão de categorias (ex: Medicamentos, Higiene, Cosméticos). 📂
+1.  **Gerenciamento de Categorias**: Criação, listagem, atualização e exclusão de categorias (ex: Medicamentos, Higiene Pessoal, Cosméticos). 📂
 2.  **Controle de Produtos**: Cadastro detalhado de itens com nome, preço, foto e descrição. 🛒
 3.  **Relacionamento entre Tabelas**: Vinculação inteligente entre produtos e categorias (Many-to-One). 🔗
 4.  **Validação de Dados**: Uso de `class-validator` para garantir que apenas dados aceitáveis entrem no sistema. ✅
 5.  **Busca Avançada**: Endpoints customizados para busca de produtos por nome e preço (menor que/maior que). 🔍
-6.  ****
+6.  **Autenticação**: Implementação de login e proteção de rotas, garantindo que apenas usuários autenticados acessem os recursos da API. 🔑
+7.  **Controle de Acesso (RBAC)**: Sistema de permissões baseado em funções (Roles), distinguindo usuários comuns de administradores. 🔐
 ------
 
 ## 3. 📊 Diagrama de Classes
@@ -66,7 +67,7 @@ classDiagram
         +Categoria categoria
     }
 
-    Categoria "1" -- "N" Produto : contém
+    Categoria "1" -- "N" Produto
     Usuario .. Role : utiliza
 ```
 
@@ -115,7 +116,10 @@ erDiagram
 | **Framework** | Nest JS                 |
 | **ORM** | TypeORM                 |
 | **Banco de dados** | MySQL     |
-| **Validação** | Class-Validator         |
+| **Validação** | Class-Validator/Class-Transformer        |
+| **Autenticação e Segurança**	| Passport & Bcrypt (Criptografia de senhas) |
+| **Documentação** | Swagger (OpenAPI)       |
+
 
 
 ------
