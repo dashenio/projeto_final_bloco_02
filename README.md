@@ -1,98 +1,145 @@
+# Projeto Final Bloco 02 - Farmácia da Gente 💊
+
+<br />
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="160" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 1. 📝 Descrição
 
-## Description
+Este projeto é uma aplicação **Backend** desenvolvida como projeto final do segundo bloco do bootcamp da Generation Brasil. O sistema consiste em uma plataforma de **e-commerce de Farmácia**. 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+------
 
-## Project setup
+## 2. ⚙️ Sobre esta API
 
-```bash
-$ npm install
+A API foi construída seguindo os princípios da arquitetura de microserviços com **NestJS**, focando em alta performance, tipagem forte com TypeScript e manutenibilidade. Ela funciona como o core de um e-commerce farmacêutico, lidando com o CRUD completo de produtos e suas respectivas categorias.
+
+### 2.1. Principais Funcionalidades
+
+1.  **Gerenciamento de Categorias**: Criação, listagem, atualização e exclusão de categorias (ex: Medicamentos, Higiene, Cosméticos). 📂
+2.  **Controle de Produtos**: Cadastro detalhado de itens com nome, preço, foto e descrição. 🛒
+3.  **Relacionamento entre Tabelas**: Vinculação inteligente entre produtos e categorias (Many-to-One). 🔗
+4.  **Validação de Dados**: Uso de `class-validator` para garantir que apenas dados aceitáveis entrem no sistema. ✅
+5.  **Busca Avançada**: Endpoints customizados para busca de produtos por nome e preço (menor que/maior que). 🔍
+6.  ****
+------
+
+## 3. 📊 Diagrama de Classes
+
+O diagrama abaixo ilustra a estrutura das classes e como os serviços se comunicam dentro do ecossistema NestJS.
+
+```mermaid
+classDiagram
+    class Role {
+        <<enumeration>>
+        Admin
+        User
+    }
+
+    class Usuario {
+        +number id
+        +string nome
+        +string usuario
+        +string senha
+        +Role roles
+    }
+
+    class Categoria {
+        +number id
+        +string tipo
+        +Produto[] produto
+    }
+
+    class Produto {
+        +number id
+        +string nome
+        +string foto
+        +string apresentacao
+        +number quantidade
+        +string fabricante
+        +boolean generico
+        +string descricao
+        +number preco
+        +Categoria categoria
+    }
+
+    Categoria "1" -- "N" Produto : contém
+    Usuario .. Role : utiliza
 ```
 
-## Compile and run the project
+------
 
-```bash
-# development
-$ npm run start
+## 4. 🗄️ Diagrama Entidade-Relacionamento (DER)
 
-# watch mode
-$ npm run start:dev
+O banco de dados foi modelado para garantir integridade referencial entre os produtos e suas categorias.
 
-# production mode
-$ npm run start:prod
+
+```mermaid
+
+erDiagram
+    CATEGORIA ||--o{ PRODUTO : "possui"
+
+    CATEGORIA {
+        int id PK
+        string tipo 
+    }
+
+    PRODUTO {
+        int id PK
+        string nome
+        string foto
+        decimal preco
+        string aprensentacao
+        int quantidade
+        string fabricante
+        boolean generico
+        string descricao
+        int categoria_id FK
+    }
+
 ```
 
-## Run tests
+</div>
 
-```bash
-# unit tests
-$ npm run test
+------
 
-# e2e tests
-$ npm run test:e2e
+## 5. 🚀 Tecnologias utilizadas
 
-# test coverage
-$ npm run test:cov
-```
+| Item                          | Descrição               |
+| ----------------------------- | ----------------------- |
+| **Servidor** | Node JS                 |
+| **Linguagem de programação** | TypeScript              |
+| **Framework** | Nest JS                 |
+| **ORM** | TypeORM                 |
+| **Banco de dados** | MySQL     |
+| **Validação** | Class-Validator         |
 
-## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+------
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 6. 🛠️ Configuração e Execução
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Para rodar este projeto localmente, siga os passos abaixo:
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/dashenio/projeto_final_bloco_02.git](https://github.com/dashenio/projeto_final_bloco_02.git)
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+3.  **Configure o banco de dados:**
+    Abra o arquivo `src/app.module.ts` e insira suas credenciais do banco de dados local.
 
-## Resources
+4.  **Execute as migrações (se necessário) e inicie a aplicação:**
+    ```bash
+    npm run start:dev
+    ```
 
-Check out a few resources that may come in handy when working with NestJS:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+Desenvolvido durante o curso da **Generation Brasil** 🚀

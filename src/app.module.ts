@@ -26,6 +26,6 @@ import { Usuario } from './usuario/entities/usuario.entity';
     CategoriaModule, ProdutoModule, UsuarioModule, AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

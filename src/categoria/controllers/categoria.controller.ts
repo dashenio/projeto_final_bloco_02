@@ -5,35 +5,38 @@ import { Roles } from "../../auth/decorators/roles.decorator";
 import { Role } from "../../usuario/entities/usuario.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { RolesGuard } from "../../auth/guard/roles.guard";
+import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
-
+@ApiTags('Categoria')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @Controller('/categorias')
 export class CategoriaController{
     
     constructor( private readonly categoriaService: CategoriaService){}
 
-    @UseGuards(JwtAuthGuard)
+    
     @Get('/all')
     @HttpCode(HttpStatus.OK)
     findAll(): Promise<Categoria[]>{
         return this.categoriaService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
+    
     @Get('/:id')
     @HttpCode(HttpStatus.OK) 
     findById(@Param('id', ParseIntPipe) id: number): Promise<Categoria>{
         return this.categoriaService.findById(id);
     }
 
-    @UseGuards(JwtAuthGuard)
+   
     @Get('/tipo/:tipo') 
     @HttpCode(HttpStatus.OK) 
     findAllByTipo(@Param('tipo') tipo: string): Promise<Categoria[]>{
         return this.categoriaService.findAllByTipo(tipo);
     }
 
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(RolesGuard)
     @Roles(Role.Admin)
     @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED) 
@@ -42,7 +45,7 @@ export class CategoriaController{
   
     }
 
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(RolesGuard)
     @Roles(Role.Admin)
     @Put('/atualizar')
     @HttpCode(HttpStatus.OK) 
@@ -51,7 +54,7 @@ export class CategoriaController{
     
     }
 
-    @UseGuards(JwtAuthGuard, RolesGuard)
+    @UseGuards(RolesGuard)
     @Roles(Role.Admin)
     @Delete("/:id")
     @HttpCode(HttpStatus.NO_CONTENT)
