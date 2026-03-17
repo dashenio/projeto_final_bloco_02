@@ -139,6 +139,8 @@ Para rodar este projeto localmente, siga os passos abaixo:
     ```bash
     npm run start:dev
     ```
+5.  **Acesse a documentação:**
+    Acesse `http://localhost:4000/swagger` para visualizar e testar os endpoints.
 
 
 ---
