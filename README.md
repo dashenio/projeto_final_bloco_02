@@ -1,7 +1,5 @@
 # Farmácia da Gente
 
-----------------
-
 <p align="center">
   <img src="https://ik.imagekit.io/dashen/fpb_02/medicine.svg" height="200px">
 </p>
