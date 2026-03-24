@@ -17,7 +17,7 @@
 
 ## 1. Descrição
 
-Este projeto é uma aplicação **backend** desenvolvida como projeto final do segundo bloco do bootcamp da Generation Brasil. O sistema consiste em uma plataforma de **e-commerce de farmácia**. 
+Este projeto é uma aplicação **backend** desenvolvida como projeto final do segundo bloco do bootcamp da Generation Brasil. O sistema consiste em uma plataforma de gerenciamento de **e-commerce para farmácias**. 
 
 ------
 
@@ -147,16 +147,16 @@ Para rodar este projeto localmente, siga os passos abaixo:
 3. **🛢️ Configure o banco de dados:**
    Abra o arquivo `src/app.module.ts` e insira suas credenciais do banco de dados local.
 
-4. **Execute a aplicação:**
+4. 🚀 **Execute a aplicação:**
 
    ```bash
    npm run start:dev
    ```
 
-5. **Acesse a documentação:**
+5. 📖 **Acesse a documentação:**
    Acesse http://localhost:4000 para visualizar e testar os endpoints.
 
 
 ---
-Desenvolvido por **Vivian Rodrigues** durante o Bootcamp da **Generation Brasil** 🚀
+Desenvolvido por **Vivian Rodrigues** durante o Bootcamp da **Generation Brasil** 
 
