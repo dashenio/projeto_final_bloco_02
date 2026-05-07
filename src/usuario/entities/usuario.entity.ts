@@ -1,12 +1,8 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator"
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
-import { Exclude, Transform, TransformFnParams } from "class-transformer"
+import { Transform, TransformFnParams } from "class-transformer"
 import { ApiProperty } from "@nestjs/swagger";
 
-export enum Role {
-    Admin = "admin",
-    User = "user"
-}
 
 @Entity({name: "tb_usuarios"})
 export class Usuario {
@@ -34,13 +30,5 @@ export class Usuario {
     @IsNotEmpty()
     @Column({length: 255, nullable: false }) 
     senha: string;
-
-    @ApiProperty()
-    @Column({
-        type: 'enum',
-        enum: Role,
-        default: Role.User
-    })
-    roles: Role;
 
 }

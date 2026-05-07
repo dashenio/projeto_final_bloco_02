@@ -3,7 +3,6 @@ import { IsNotEmpty, Length } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Produto } from "../../produto/entities/produto.entity";
 import { ApiProperty } from "@nestjs/swagger";
-import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Entity({name:'tb_categorias'})
 export class Categoria{

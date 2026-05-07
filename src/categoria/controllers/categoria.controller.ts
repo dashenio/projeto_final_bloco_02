@@ -1,10 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards} from "@nestjs/common";
 import { Categoria } from "../entities/catgoria.entity";
 import { CategoriaService } from "../services/categoria.service";
-import { Roles } from "../../auth/decorators/roles.decorator";
-import { Role } from "../../usuario/entities/usuario.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
-import { RolesGuard } from "../../auth/guard/roles.guard";
 import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
 @ApiTags('Categoria')
@@ -36,8 +33,7 @@ export class CategoriaController{
         return this.categoriaService.findAllByTipo(tipo);
     }
 
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+   
     @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED) 
     create(@Body() categoria: Categoria): Promise<Categoria>{
@@ -45,8 +41,7 @@ export class CategoriaController{
   
     }
 
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+    
     @Put('/atualizar')
     @HttpCode(HttpStatus.OK) 
     update(@Body() categoria: Categoria): Promise<Categoria>{
@@ -54,8 +49,7 @@ export class CategoriaController{
     
     }
 
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+    
     @Delete("/:id")
     @HttpCode(HttpStatus.NO_CONTENT)
     delete(@Param('id', ParseIntPipe) id: number){

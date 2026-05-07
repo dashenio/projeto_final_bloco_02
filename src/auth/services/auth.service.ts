@@ -40,8 +40,7 @@ export class AuthService{
             throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
 
         const payload = { 
-            sub: usuarioLogin.usuario,
-            roles: buscaUsuario.roles 
+            sub: usuarioLogin.usuario 
         }
 
         return {

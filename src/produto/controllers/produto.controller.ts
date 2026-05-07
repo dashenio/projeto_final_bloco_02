@@ -1,20 +1,18 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { ProdutoService } from "../services/produto.service";
 import { Produto } from "../entities/produto.entity";
-import { Roles } from "../../auth/decorators/roles.decorator";
-import { Role } from "../../usuario/entities/usuario.entity";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
-import { RolesGuard } from "../../auth/guard/roles.guard";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Produto')
 @ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
 @Controller('/produtos')
 export class ProdutoController{
     
     constructor( private readonly produtoService: ProdutoService ){}
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get('/all')
     @HttpCode(HttpStatus.OK)
     findAll(): Promise<Produto[]>{
@@ -51,8 +49,7 @@ export class ProdutoController{
         return this.produtoService.findAllLesser(valor);
     }
 
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+    
     @Post('/cadastrar')
     @HttpCode(HttpStatus.CREATED) 
     create(@Body() produto: Produto): Promise<Produto>{
@@ -60,8 +57,7 @@ export class ProdutoController{
   
     }
     
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+    
     @Put('/atualizar')
     @HttpCode(HttpStatus.OK) 
     update(@Body() produto: Produto): Promise<Produto>{
@@ -69,8 +65,7 @@ export class ProdutoController{
     
     }
     
-    @UseGuards(RolesGuard)
-    @Roles(Role.Admin)
+   
     @Delete("/:id")
     @HttpCode(HttpStatus.NO_CONTENT)
     delete(@Param('id', ParseIntPipe) id: number){
