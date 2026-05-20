@@ -49,7 +49,7 @@ export class AuthService{
             nome: buscaUsuario.nome,
             usuario: usuarioLogin.usuario,
             senha: '',
-            roles: '',
+            roles: buscaUsuario.roles,
             token: `Bearer ${this.jwtService.sign(payload)}`,
         }
 
